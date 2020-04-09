@@ -6,7 +6,12 @@ package presentation;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
 import javax.swing.*;
+
+import com.sun.scenario.effect.InvertMask;
+import middleware.AuthenticationService;
+import middleware.InventoryService;
 import org.jdesktop.layout.GroupLayout;
 import org.jdesktop.layout.LayoutStyle;
 
@@ -36,7 +41,16 @@ public class LoginDialog extends JDialog {
     private void loginButtonActionPerformed(ActionEvent e) {
         // TODO add your code here
         String username = usernameText.getText();
-        String role = username; // get role from firebase
+        String password = new String(passwordText.getPassword());
+        String role = "";
+
+        try {
+            role = AuthenticationService.getInstance().GainUserRole(username, password); // get role from firebase
+            System.out.println(role);
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+
         if (role.equals("order")) {
             new OrderMainFrame().setVisible(true);
         }
