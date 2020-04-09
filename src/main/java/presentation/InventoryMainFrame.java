@@ -7,6 +7,9 @@ package presentation;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
+import middleware.InventoryService;
+import model.Product;
 import org.jdesktop.layout.GroupLayout;
 import org.jdesktop.layout.LayoutStyle;
 
@@ -18,28 +21,98 @@ public class InventoryMainFrame extends JFrame {
         initComponents();
     }
 
+    private static String productType = "";
+
     private void treesRadioButtonActionPerformed(ActionEvent e) {
-        // TODO add your code here
+        productType = "trees";
     }
 
     private void seedsRadioButtonActionPerformed(ActionEvent e) {
-        // TODO add your code here
+        productType = "seeds";
     }
 
     private void shrubsRadioButtonActionPerformed(ActionEvent e) {
-        // TODO add your code here
+        productType = "shrubs";
     }
 
-    private void productIdTextActionPerformed(ActionEvent e) {
-        // TODO add your code here
+    private void cultureBoxesRadioButtonActionPerformed(ActionEvent e) {
+        productType = "cultureBoxes";
+    }
+
+    private void genomicsRadioButtonActionPerformed(ActionEvent e) {
+        productType = "genomics";
+    }
+
+    private void processingRadioButtonActionPerformed(ActionEvent e) {
+        productType = "processing";
+    }
+
+    private void referenceMaterialsRadioButtonActionPerformed(ActionEvent e) {
+        productType = "referenceMaterials";
     }
 
     private void addItemButtonActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
+        Boolean fieldError = false;     // Error flag
+        inventoryTextArea.setText("");
 
-    private void productDescriptionTextActionPerformed(ActionEvent e) {
-        // TODO add your code here
+        if (!treesRadioButton.isSelected() && !seedsRadioButton.isSelected() &&
+                !shrubsRadioButton.isSelected() && !cultureBoxesRadioButton.isSelected() &&
+                !genomicsRadioButton.isSelected() && !processingRadioButton.isSelected() && !referenceMaterialsRadioButton.isSelected()){
+            fieldError = true;
+            inventoryTextArea.setText("\n Please, specify product type");
+        } else {
+            //Make sure there is a product description
+            if ( productDescriptionText.getText().length() == 0 )
+            {
+                fieldError = true;
+                inventoryTextArea.append("\nMust enter a product description.");
+
+            } else {
+                //Make sure there is a product ID
+                if ( productIdText.getText().length() == 0 )
+                {
+                    fieldError = true;
+                    inventoryTextArea.append("\nMust enter a product ID.");
+                } else {
+                    //Make sure there is a price
+                    if ( priceText.getText().length() == 0 )
+                    {
+                        fieldError = true;
+                        inventoryTextArea.append("\nMust enter a product price.");
+                    } else {
+                        //Make sure quantity is specified
+                        if ( quantityText.getText().length() == 0 )
+                        {
+                            fieldError = true;
+                            inventoryTextArea.append("\nMust enter a product quantity.");
+                        } // quantity
+                    } // price
+                } // product ID
+            } //product description
+        } //category selected
+
+        if (!fieldError)
+        {
+            try
+            {
+                // get the data from the text fields
+                String description = productDescriptionText.getText();
+                String productID = productIdText.getText();
+                int quantity = Integer.parseInt(quantityText.getText());
+                double perUnitCost = Float.parseFloat(priceText.getText());
+
+                InventoryService.getInstance().AddProduct(new Product(productID, productType, description, perUnitCost, quantity));
+
+                inventoryTextArea.append("\nINVENTORY UPDATED... The following was added to the inventory...\n");
+                inventoryTextArea.append("\nProduct Code:: " + productID);
+                inventoryTextArea.append("\nProduct Type:: " + productType);
+                inventoryTextArea.append("\nDescription::  " + description);
+                inventoryTextArea.append("\nQuantity::     " + quantity);
+                inventoryTextArea.append("\nUnit Cost::    " + perUnitCost);
+            } catch (Exception ex) {
+                inventoryTextArea.append("\nProblem adding inventory:: " + ex);
+            } // try
+        } //execute SQL check
     }
 
     private void listInventoryButtonActionPerformed(ActionEvent e) {
@@ -54,20 +127,12 @@ public class InventoryMainFrame extends JFrame {
         // TODO add your code here
     }
 
-    private void cultureBoxesRadioButtonActionPerformed(ActionEvent e) {
-        // TODO add your code here
+    private void productIdTextActionPerformed(ActionEvent e) {
+        // TODO: not used - delete later!
     }
 
-    private void genomicsRadioButtonActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void processingRadioButtonActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void referenceMaterialsRadioButtonActionPerformed(ActionEvent e) {
-        // TODO add your code here
+    private void productDescriptionTextActionPerformed(ActionEvent e) {
+        // TODO: not used - delete later!
     }
 
     private void initComponents() {

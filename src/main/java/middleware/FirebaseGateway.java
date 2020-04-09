@@ -6,19 +6,22 @@ import com.google.cloud.firestore.*;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
+import model.Product;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
+import java.util.Map;
 
 /**
  * Created by arman 4/9/20.
  */
-public class FirebaseGateway {
+class FirebaseGateway {
 
-    public static Firestore GetClient(){
+    private static Firestore GetClient(){
         FileInputStream serviceAccount =
                 null;
         try {
@@ -34,16 +37,17 @@ public class FirebaseGateway {
                     .setDatabaseUrl("https://leaftech-eep-web-system.firebaseio.com")
                     .build();
 
-            FirebaseApp.initializeApp(options);
+            if(FirebaseApp.getApps().isEmpty()) {
+                FirebaseApp.initializeApp(options);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-
         return FirestoreClient.getFirestore();
     }
 
-    public String GetUserRoleByLoginAndPassword(String login, String password) throws Exception {
+    String GetUserRoleByLoginAndPassword(String login, String password) throws Exception {
         Firestore client = GetClient();
 
         Query query = client.collection("users").whereEqualTo("login", login).whereEqualTo("password", password);
@@ -57,5 +61,20 @@ public class FirebaseGateway {
         }
 
         return "";
+    }
+
+    void AddNewInventoryItem(Product product){
+        Firestore client = GetClient();
+
+        Map<String, Object> productData = new HashMap<String, Object>();
+
+        productData.put("id", product.Id);
+        productData.put("type", product.Type);
+        productData.put("description", product.Description);
+        productData.put("price", product.Price);
+        productData.put("quantity", product.Quantity);
+
+        // runs in asynchronous mode
+        client.collection("products").document().set(productData);
     }
 }
