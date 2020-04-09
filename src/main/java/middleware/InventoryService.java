@@ -35,4 +35,10 @@ public class InventoryService {
 
         return firebaseGateway.GetListOfProductsByType(type);
     }
+
+    public void DeleteProductById(String Id) {
+        FirebaseGateway firebaseGateway = new FirebaseGateway();
+
+        firebaseGateway.DeleteProductById(Id);
+    }
 }

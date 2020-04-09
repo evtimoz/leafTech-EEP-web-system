@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by arman 4/9/20.
@@ -97,5 +98,24 @@ class FirebaseGateway {
         }
 
         return resultingList;
+    }
+
+    void DeleteProductById(String Id){
+        Firestore client = GetClient();
+        ApiFuture<QuerySnapshot> future =
+                client.collection("products").whereEqualTo("id", Id).get();
+
+        try {
+            List<QueryDocumentSnapshot> productDocuments = future.get().getDocuments();
+
+            if(productDocuments.size() != 0){
+                QueryDocumentSnapshot productToDelete = productDocuments.get(0);
+
+                productToDelete.getReference().delete();
+            }
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }

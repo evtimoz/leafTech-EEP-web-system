@@ -155,7 +155,60 @@ public class InventoryMainFrame extends JFrame {
     }
 
     private void deleteItemButtonActionPerformed(ActionEvent e) {
-        // TODO add your code here
+        // Deletes an item from the database
+
+        int beginIndex;                     // Parsing index
+        int endIndex;                       // Parsing index
+        String productID = null;            // Product ID pnemonic
+        boolean IndexNotFound;              // Flag indicating a string index was not found.
+        String inventorySelection;   // Inventory text string selected by user
+        IndexNotFound = false;              // Flag indicating that a string index was not found
+
+        // this is the selected line of text
+        inventorySelection =  inventoryTextArea.getSelectedText();
+
+        // make sure the selection is not blank
+        if ( inventorySelection != null )
+        {
+            // get the product ID - here we get the leading index
+            beginIndex = 0;
+            endIndex = inventorySelection.indexOf(">>",beginIndex);
+
+            if (endIndex < 0 ) {
+                IndexNotFound = true;
+            } else {
+                beginIndex = endIndex+2; //skip past ">>"
+            }
+
+            if ( !IndexNotFound )
+            {
+                // Here we get the trailing index and parse out the productID
+                endIndex = inventorySelection.indexOf(":",beginIndex);
+
+                if (endIndex < 0 ) {
+                    IndexNotFound = true;
+                } else {
+                    productID = inventorySelection.substring(beginIndex,endIndex);
+                }
+            }
+
+            // Now we delete the inventory item indicated by the productID we
+            // parsed out above from the indicated table.
+            if ( !IndexNotFound )
+            {
+                inventoryTextArea.setText("");
+                inventoryTextArea.append("Deleting ProductID: " + productID);
+
+                InventoryService.getInstance().DeleteProductById(productID.trim());
+            } else {
+                inventoryTextArea.setText("");
+                inventoryTextArea.append("\nNo items selected...\nSELECT ENTIRE INVENTORY LINE TO ADD ITEM TO ORDER\n(TRIPLE CLICK ITEM LINE)");
+
+            }
+        } else {
+            inventoryTextArea.setText("");
+            inventoryTextArea.append("\nNo items selected...\nSELECT ENTIRE INVENTORY LINE TO ADD ITEM TO ORDER\n(TRIPLE CLICK ITEM LINE)");
+        } // Blank string check
     }
 
     private void decrementButtonActionPerformed(ActionEvent e) {
