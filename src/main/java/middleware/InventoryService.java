@@ -2,6 +2,8 @@ package middleware;
 
 import model.Product;
 
+import java.util.List;
+
 /**
  * Created by arman 4/9/20.
  */
@@ -26,5 +28,11 @@ public class InventoryService {
         FirebaseGateway firebaseGateway = new FirebaseGateway();
 
         firebaseGateway.AddNewInventoryItem(product);
+    }
+
+    public List<Product> GetProductsByType(String type){
+        FirebaseGateway firebaseGateway = new FirebaseGateway();
+
+        return firebaseGateway.GetListOfProductsByType(type);
     }
 }

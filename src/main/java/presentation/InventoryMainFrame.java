@@ -12,6 +12,8 @@ import middleware.InventoryService;
 import model.Product;
 import org.jdesktop.layout.GroupLayout;
 import org.jdesktop.layout.LayoutStyle;
+import java.util.List;
+
 
 /**
  * @author evtimoz
@@ -116,7 +118,40 @@ public class InventoryMainFrame extends JFrame {
     }
 
     private void listInventoryButtonActionPerformed(ActionEvent e) {
-        // TODO add your code here
+        // This button will list the inventory for the product
+        boolean fieldError = true;      // Error flag
+
+        //Clear the fields - they are not needed and may cause confusion
+        inventoryTextArea.setText("");
+
+        // Check to make sure a radio button is selected
+        if ((treesRadioButton.isSelected() || seedsRadioButton.isSelected() ||
+                shrubsRadioButton.isSelected() || cultureBoxesRadioButton.isSelected() ||
+                genomicsRadioButton.isSelected() || processingRadioButton.isSelected() || referenceMaterialsRadioButton.isSelected()))
+        {
+            fieldError = false;
+        } else {
+            inventoryTextArea.setText("\n Please, specify product type");
+        }
+
+        if (!fieldError)
+        {
+            try
+            {
+                List<Product> products = InventoryService.getInstance().GetProductsByType(productType);
+
+                // Now we list the inventory for the selected table
+                inventoryTextArea.setText("");
+                for (Product product : products) {
+                    String msgString = productType + " >> " + product.getId() + " :: " + product.getDescription() +
+                            " :: "+ product.getQuantity() + " :: " + product.getPrice();
+                    inventoryTextArea.append("\n" + msgString);
+                }
+
+            } catch(Exception ex) {
+                inventoryTextArea.append("\nProblem with " + productType +" query:: " + ex);
+            } // try
+        }
     }
 
     private void deleteItemButtonActionPerformed(ActionEvent e) {

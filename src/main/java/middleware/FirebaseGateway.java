@@ -1,6 +1,7 @@
 package middleware;
 
 import com.google.api.core.ApiFuture;
+import com.google.api.services.storage.Storage;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.*;
 import com.google.firebase.FirebaseApp;
@@ -68,13 +69,33 @@ class FirebaseGateway {
 
         Map<String, Object> productData = new HashMap<String, Object>();
 
-        productData.put("id", product.Id);
-        productData.put("type", product.Type);
-        productData.put("description", product.Description);
-        productData.put("price", product.Price);
-        productData.put("quantity", product.Quantity);
+        productData.put("id", product.getId());
+        productData.put("type", product.getType());
+        productData.put("description", product.getDescription());
+        productData.put("price", product.getPrice());
+        productData.put("quantity", product.getQuantity());
 
         // runs in asynchronous mode
         client.collection("products").document().set(productData);
+    }
+
+    List<Product> GetListOfProductsByType(String type) {
+        List<Product> resultingList = new ArrayList<Product>();
+        Firestore client = GetClient();
+
+        ApiFuture<QuerySnapshot> future =
+                client.collection("products").whereEqualTo("type", type).get();
+
+        try {
+            List<QueryDocumentSnapshot> productDocuments = future.get().getDocuments();
+            for (DocumentSnapshot document : productDocuments) {
+                resultingList.add(document.toObject(Product.class));
+            }
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return resultingList;
     }
 }
