@@ -1,0 +1,145 @@
+JFDML JFormDesigner: "7.0.1.0.272" Java: "11.0.4" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq l {space :p:45:p, par l {seq t {par t {comp jScrollPane4::l:::x, comp jScrollPane2::l:::x:1, seq t {space :0:0:x, comp shippingApplicationLabel:::p::p, space :p:228:p}, seq l {comp jScrollPane3:::p:715:p:1, space :::x, comp markAsShippedButton:::p:151:p:1}, seq l {comp jScrollPane1::::16:x:1, space :p:444:p, comp jScrollPane5:::p:716:p:1, space :::p, comp selectOrderButton:::p:151:p}, seq {par l {comp firstNameText::l:p:171:p, comp firstNameLabel::l:p::p}, space s:::p, par l {comp lastNameLabel::l:p::p, comp lastNameText::l:p:173:p}, space u:::p, par l {comp phoneLabel:::p::p:1, comp phoneText:::p:91:p:1}, space :p:10:p, par l {comp orderDateLabel:::p::p, comp orderDateText:::::x}}, seq l {par t {comp mailingAddressLabel::l:p::p, par t:l::p {comp showShippedOrdersButton::l:::x:1, comp showPendingOrdersButton::l:::x:1}}, space :0:0:x}}, space :p:45:p}, seq {par l {comp messagesLabel::l:p::p, comp orderItemsLabel::l:p::p, comp jLabel4::l:p::p, comp orderLabel::l:p::p}, space :::p}}}}"
+			"$verticalGroup": "par l {seq l {space :::p, comp shippingApplicationLabel:::p::p, space u:::p, comp showPendingOrdersButton:::p::p, space :p:8:p, comp showShippedOrdersButton:::p::p, space s:::p, comp orderLabel:::p::p, space :::p, par l {comp selectOrderButton:::::x:1, comp jScrollPane5::l:p::p:1, comp jScrollPane1::l:p::p:1}, space s:::p, comp jLabel4:::p::p, space :p:10:p, par b {comp firstNameLabel::b:p::p, comp lastNameLabel::b:p::p, comp phoneLabel::b:p::p, comp orderDateLabel::b:p::p}, space :::p, par b {comp firstNameText::b:p::p, comp orderDateText::b:p::p, comp lastNameText::b:p::p, comp phoneText::b:p::p}, space :::p, comp mailingAddressLabel:::p::p, space :::p, comp jScrollPane2:::p:51:p, space u:::p, comp orderItemsLabel:::p::p, space :::p, par l {seq {comp jScrollPane3:::p::p:1, space :p:14:p, comp messagesLabel:::p::p}, comp markAsShippedButton:::p:99:p:1}, space u:::p, comp jScrollPane4:::p:110:p, space :p:32:p}}"
+		} ) {
+			name: "this"
+			"defaultCloseOperation": 3
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "shippingApplicationLabel"
+				"text": "Shipping Application"
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "jScrollPane1"
+				add( new FormComponent( "javax.swing.JTextArea" ) {
+					name: "orderTextArea"
+					"editable": false
+					"columns": 20
+					"rows": 5
+				} )
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "firstNameText"
+				"editable": false
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "firstNameTextActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "jLabel4"
+				"text": "Order Information:"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "firstNameLabel"
+				"text": "Customer First Name:"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "lastNameLabel"
+				"text": "Last Name:"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "lastNameText"
+				"editable": false
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "lastNameTextActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "phoneLabel"
+				"text": "Phone Number:"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "phoneText"
+				"editable": false
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "phoneTextActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "mailingAddressLabel"
+				"text": "Mailing Address"
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "jScrollPane2"
+				add( new FormComponent( "javax.swing.JTextArea" ) {
+					name: "mailingAddressTextArea"
+					"editable": false
+					"columns": 20
+					"rows": 5
+				} )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "markAsShippedButton"
+				"text": "Mark As Shipped"
+				"enabled": false
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "markAsShippedButtonActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "showPendingOrdersButton"
+				"text": "Show  Pending Orders"
+				"defaultCapable": false
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showPendingOrdersButtonActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "selectOrderButton"
+				"text": "Select Order"
+				"enabled": false
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "selectOrderButtonActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "orderLabel"
+				"text": "Order Number : Order Date & Time: Customer Name"
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "jScrollPane3"
+				add( new FormComponent( "javax.swing.JTextArea" ) {
+					name: "orderItemsTextArea"
+					"editable": false
+					"columns": 20
+					"rows": 5
+				} )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "orderItemsLabel"
+				"text": "Order Items "
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "messagesLabel"
+				"text": "Messages"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "showShippedOrdersButton"
+				"text": "Show Shipped Orders"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showShippedOrdersButtonActionPerformed", true ) )
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "jScrollPane4"
+				add( new FormComponent( "javax.swing.JTextArea" ) {
+					name: "messagesTextArea"
+					"editable": false
+					"columns": 20
+					"rows": 5
+				} )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "orderDateLabel"
+				"text": "Order Date:"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "orderDateText"
+				"editable": false
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "orderDateTextActionPerformed", true ) )
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "jScrollPane5"
+				add( new FormComponent( "javax.swing.JTextArea" ) {
+					name: "orderTextArea1"
+					"editable": false
+					"columns": 20
+					"rows": 5
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"size": new java.awt.Dimension( 1035, 300 )
+			"location": new java.awt.Point( 0, 0 )
+		} )
+	}
+}

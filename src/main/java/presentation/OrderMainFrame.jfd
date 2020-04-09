@@ -1,0 +1,168 @@
+JFDML JFormDesigner: "7.0.1.0.272" Java: "11.0.4" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq {par l {seq l {space :p:316:p, comp jLabel1:::p::p}, seq {space :::p, par t {comp lastNameText::l:::x:1, comp jLabel12::l:p::p, comp jScrollPane4::l::0:x:1, comp jLabel7::l:p::p, comp firstNameText::l:::x:1, comp jLabel6::l:p::p, comp jLabel3::l:p::p, comp jLabel8::l:p::p, comp phoneTextArea:::::x:1}, space :::p, par l {seq l {space :p:9:p, comp itemsSelectedLabel:::p::p, space :::p, comp jScrollPane1:::p:612:p, space :::x}, seq {par l {seq l {comp jLabel4:::p::p, space :::x, comp databaseServerIpLabel:::p::p}, comp jScrollPane2::l:::x:1, comp jScrollPane3::l:::x, seq {par l {seq {space :p:10:p, comp messagesLabel:::p::p}, comp jLabel13:::p::p, comp jLabel10:::p::p, seq l {comp treesButton:::p::p, space s:::p, comp seedsButton:::p::p, space :p:27:p, comp shrubsButton:::p::p, space s:::p, comp cultureBoxesButton:::p::p, space s:::p, comp genomicsButton:::p::p, space s:::p, comp processesButton:::p::p}}, space :0:0:x}}, space :::p}}, par l {comp referenceMaterialsButton:::p::p, par t {par l:::p {comp addToOrderButton::l:::x:1, comp costLabel::l:::x:1, comp costText::l:::x:1}, comp databaseServerIpText:::p:110:p}}}}, space :p:74:p}, seq l {space :p:300:p, comp submitOrderButton:::p::p, space :::x}}"
+			"$verticalGroup": "par l {seq {comp jLabel1:::p::p, space :p:25:p, par b {comp jLabel4::b:p::p, comp databaseServerIpText::b:p::p, comp databaseServerIpLabel::b:p::p}, par l {seq l {space :p:7:p, comp jLabel3:::p::p}, par b:l {comp treesButton::b:p::p, comp seedsButton::b:p::p, comp shrubsButton::b:p::p, comp cultureBoxesButton::b:p::p, comp genomicsButton::b:p::p, comp processesButton::b:p::p, comp referenceMaterialsButton::b:p::p}}, space :::p, comp jLabel13:::p::p, space :p:3:p, par b {comp jLabel6::b:p::p, comp jLabel10::b:p::p}, space :::p, par l {seq {comp firstNameText:::p::p, space :p:5:p, comp jLabel7:::p:14:p, space :p:2:p, comp lastNameText:::p::p, space u:::p, comp jLabel12:::p::p, space :p::p, comp jScrollPane4:::p::p, space u:::p, comp jLabel8:::p::p, space :::p, comp phoneTextArea:::p::p}, seq {comp addToOrderButton:::p:107:p:1, space :p:13:p, comp costLabel:::p::p, space u:::p, comp costText:::p::p}, seq {par l {seq {space :p:132:p, comp itemsSelectedLabel:::p::p, space :::p}, seq t {comp jScrollPane1:::p:126:p, space :p:18:p}}, comp jScrollPane2:::p:132:p, space :::p, comp submitOrderButton:::p::p, space :p:1:p, comp messagesLabel:::p::p}}, space u:::p, comp jScrollPane3:::p:65:p, space :::x}}"
+		} ) {
+			name: "this"
+			"defaultCloseOperation": 3
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "jLabel1"
+				"text": "Order Management Application"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "treesButton"
+				"text": "Trees"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "treesButtonActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "seedsButton"
+				"text": "Seeds"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "seedsButtonActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "shrubsButton"
+				"text": "Shrubs"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "shrubsButtonActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "cultureBoxesButton"
+				"text": "Culture Boxes"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "cultureBoxesButtonActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "genomicsButton"
+				"text": "Genomics"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "genomicsButtonActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "processesButton"
+				"text": "Processes"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "processesButtonActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "referenceMaterialsButton"
+				"text": "Reference Materials"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "referenceMaterialsButtonActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "jLabel4"
+				"text": "Press Button For Inventory Display"
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "jScrollPane2"
+				add( new FormComponent( "javax.swing.JTextArea" ) {
+					name: "itemsSelectedTextArea"
+					"columns": 20
+					"rows": 5
+				} )
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "firstNameText"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "jLabel6"
+				"text": "First Name"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "jLabel7"
+				"text": "Last Name"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "lastNameText"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "lastNameTextActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "phoneTextArea"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "phoneTextAreaActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "jLabel8"
+				"text": "Phone #"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "itemsSelectedLabel"
+				"text": "Items Selected:"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "addToOrderButton"
+				"text": "Add to Order"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "addToOrderButtonActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "costLabel"
+				"text": "Order Total Cost:"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "costText"
+				"text": "$0"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "costTextActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "submitOrderButton"
+				"text": "Submit Order"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "submitOrderButtonActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "jLabel10"
+				"text": "Product ID : Product Description : Price : Items in Stock"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "messagesLabel"
+				"text": "Messages:"
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "jScrollPane3"
+				add( new FormComponent( "javax.swing.JTextArea" ) {
+					name: "messagesTextArea"
+					"columns": 20
+					"rows": 5
+				} )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "jLabel3"
+				"text": "Customer Information"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "databaseServerIpLabel"
+				"text": "Server IP Address:"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "databaseServerIpText"
+				"editable": false
+				"text": "localhost"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "jLabel12"
+				"text": "Address"
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "jScrollPane4"
+				add( new FormComponent( "javax.swing.JTextArea" ) {
+					name: "addressTextArea"
+					"columns": 20
+					"rows": 5
+				} )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "jLabel13"
+				"text": "SELECT ENTIRE INVENTORY LINE TO ADD ITEM TO ORDER (TRIPLE CLICK)"
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "jScrollPane1"
+				add( new FormComponent( "javax.swing.JTextArea" ) {
+					name: "inventoryTextArea"
+					"editable": false
+					"columns": 20
+					"rows": 5
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"size": new java.awt.Dimension( 1180, 1095 )
+			"location": new java.awt.Point( 0, 0 )
+		} )
+	}
+}

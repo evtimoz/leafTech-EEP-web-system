@@ -1,0 +1,127 @@
+JFDML JFormDesigner: "7.0.1.0.272" Java: "11.0.4" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq {space :::p, par l {seq l {space :p:13:p, par t {comp productIdLabel:::p::p, comp productDescriptionLabel:::p::p, comp priceLabel::t:p::p, comp quantityLabel:::p::p}, space :p:5:p, par l {seq {comp productDescriptionText:::p:920:p, space :0:68:x}, seq l {par l:::p {comp priceText::l:::x:1, comp quantityText::l:::x:1, comp productIdText::l:p:137:p:1}, space :p:26:p, par l {seq l {comp treesRadioButton:::p::p, space :p:9:p, par l {seq {space :p:51:p, comp addItemButton:::p:123:p:1}, seq t {comp shrubsRadioButton:::p::p, space s:::p, comp seedsRadioButton:::p::p}}}, comp listInventoryButton::t:p:123:p:1}, space s:::p, par l {seq {comp decrementButton:::p:123:p, space u:::p, comp decrementText:::::x}, seq {par l {seq {comp deleteItemButton:::p:123:p, space u:::p, comp deleteText:::p::p}, seq l {comp cultureBoxesRadioButton:::p::p, space u:::p, comp genomicsRadioButton:::p::p, space u:::p, comp processingRadioButton:::p::p, space u:::p, comp referenceMaterialsRadioButton:::p::p}}, space :0:0:x}}}}}, comp jSeparator1::t:::x:1, comp inventoryScrollPane::l:::x}, space :::p}, seq l {space :p:324:p, comp frameTitleLabel:::p::p, space :::x}}"
+			"$verticalGroup": "par l {seq t {space :::p, comp frameTitleLabel:::p::p, space ::103:x, par b {comp productDescriptionText::b:p::p, comp productDescriptionLabel::b:p::p}, par b {comp productIdText::b:p::p, comp treesRadioButton::b:p::p, comp productIdLabel::b:p::p, comp shrubsRadioButton::b:p::p, comp seedsRadioButton::b:p::p, comp cultureBoxesRadioButton::b:p::p, comp genomicsRadioButton::b:p::p, comp processingRadioButton::b:p::p, comp referenceMaterialsRadioButton::b:p::p}, space u:::p, par b {comp priceText::b:p::p, comp priceLabel::b:p::p}, space u:::p, par b {comp quantityText::b:p::p, comp quantityLabel::b:p::p, comp deleteItemButton::b:p:31:p, comp deleteText::b:p::p, comp addItemButton::b:p:31:p}, space s:::p, par b {comp decrementButton::b:p::p, comp decrementText::b:p::p, comp listInventoryButton::b:p:31:p}, space :p:55:p, comp jSeparator1:::p::p, space s:::p, comp inventoryScrollPane:::p:289:p, space :::p}}"
+		} ) {
+			name: "this"
+			"defaultCloseOperation": 3
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "treesRadioButton"
+				"text": "Trees"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "treesRadioButtonActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "seedsRadioButton"
+				"text": "Shrubs"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "seedsRadioButtonActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "shrubsRadioButton"
+				"text": "Seeds"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "shrubsRadioButtonActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "frameTitleLabel"
+				"font": new java.awt.Font( "Tahoma", 0, 24 )
+				"text": "EEPs Inventory Management Application"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "productIdLabel"
+				"text": "Product ID"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "priceLabel"
+				"text": "Price"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "quantityLabel"
+				"text": "Quantity"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "productIdText"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "productIdTextActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "priceText"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "quantityText"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "addItemButton"
+				"text": "Add Item"
+				"actionCommand": "jButton1"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "addItemButtonActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JSeparator" ) {
+				name: "jSeparator1"
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "inventoryScrollPane"
+				add( new FormComponent( "javax.swing.JTextArea" ) {
+					name: "inventoryTextArea"
+					"columns": 20
+					"rows": 5
+				} )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "productDescriptionLabel"
+				"text": "Product Description"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "productDescriptionText"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "productDescriptionTextActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "listInventoryButton"
+				"text": "List Inventory"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "listInventoryButtonActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "deleteItemButton"
+				"text": "Delete Item"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "deleteItemButtonActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "decrementButton"
+				"text": "Decrement"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "decrementButtonActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "deleteText"
+				"text": "Deletes item selected from list "
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "decrementText"
+				"text": "Decrements inventory count of item selected from the list"
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "cultureBoxesRadioButton"
+				"text": "Culture Boxes"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "cultureBoxesRadioButtonActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "genomicsRadioButton"
+				"text": "Genomics"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "genomicsRadioButtonActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "processingRadioButton"
+				"text": "Processing"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "processingRadioButtonActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "referenceMaterialsRadioButton"
+				"text": "Reference Materials"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "referenceMaterialsRadioButtonActionPerformed", true ) )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"size": new java.awt.Dimension( 1125, 735 )
+			"location": new java.awt.Point( 0, 0 )
+		} )
+	}
+}
