@@ -16,12 +16,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by arman 4/9/20.
  */
-class FirebaseGateway {
+public class FirebaseGateway {
 
     private static Firestore GetClient(){
         FileInputStream serviceAccount =
@@ -49,7 +48,7 @@ class FirebaseGateway {
         return FirestoreClient.getFirestore();
     }
 
-    String GetUserRoleByLoginAndPassword(String login, String password) throws Exception {
+    public String GetUserRoleByLoginAndPassword(String login, String password) throws Exception {
         Firestore client = GetClient();
 
         Query query = client.collection("users").whereEqualTo("login", login).whereEqualTo("password", password);
