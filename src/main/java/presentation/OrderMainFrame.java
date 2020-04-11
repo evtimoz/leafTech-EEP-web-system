@@ -6,7 +6,11 @@ package presentation;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.List;
 import javax.swing.*;
+
+import middleware.InventoryService;
+import model.Product;
 import org.jdesktop.layout.GroupLayout;
 import org.jdesktop.layout.LayoutStyle;
 
@@ -20,29 +24,148 @@ public class OrderMainFrame extends JFrame {
 
     private void treesButtonActionPerformed(ActionEvent e) {
         // TODO add your code here
+        inventoryTextArea.setText("");
+
+        try {
+            List<Product> products = InventoryService.getInstance().GetProductsByType("tree");
+
+            // Now we list the inventory for the selected table
+            inventoryTextArea.setText("");
+            for (Product product : products) {
+                String msgString = product.getId() + " : " + product.getDescription() +
+                        " : $"+ product.getPrice() + " : " + product.getQuantity()
+                        + " units in stock";
+                inventoryTextArea.append("\n" + msgString);
+            }
+        } catch (Exception ex) {
+            String errString =  "\nProblem getting inventory:: " + e;
+            inventoryTextArea.append(errString);
+        }
     }
 
     private void seedsButtonActionPerformed(ActionEvent e) {
-        // TODO add your code here
+        inventoryTextArea.setText("");
+
+        try {
+            List<Product> products = InventoryService.getInstance().GetProductsByType("seed");
+
+            // Now we list the inventory for the selected table
+            inventoryTextArea.setText("");
+            for (Product product : products) {
+                String msgString = product.getId() + " : " + product.getDescription() +
+                        " : $"+ product.getPrice() + " : " + product.getQuantity()
+                        + " units in stock";
+                inventoryTextArea.append("\n" + msgString);
+            }
+        } catch (Exception ex) {
+            String errString =  "\nProblem getting inventory:: " + e;
+            inventoryTextArea.append(errString);
+        }
     }
 
     private void shrubsButtonActionPerformed(ActionEvent e) {
-        // TODO add your code here
+        inventoryTextArea.setText("");
+
+        try {
+            List<Product> products = InventoryService.getInstance().GetProductsByType("shrub");
+
+            // Now we list the inventory for the selected table
+            inventoryTextArea.setText("");
+            for (Product product : products) {
+                String msgString = product.getId() + " : " + product.getDescription() +
+                        " : $"+ product.getPrice() + " : " + product.getQuantity()
+                        + " units in stock";
+                inventoryTextArea.append("\n" + msgString);
+            }
+        } catch (Exception ex) {
+            String errString =  "\nProblem getting inventory:: " + e;
+            inventoryTextArea.append(errString);
+        }
     }
 
     private void cultureBoxesButtonActionPerformed(ActionEvent e) {
-        // TODO add your code here
+        inventoryTextArea.setText("");
+
+        try {
+            List<Product> products = InventoryService.getInstance().GetProductsByType("culturebox");
+
+            // Now we list the inventory for the selected table
+            inventoryTextArea.setText("");
+            for (Product product : products) {
+                String msgString = product.getId() + " : " + product.getDescription() +
+                        " : $"+ product.getPrice() + " : " + product.getQuantity()
+                        + " units in stock";
+                inventoryTextArea.append("\n" + msgString);
+            }
+        } catch (Exception ex) {
+            String errString =  "\nProblem getting inventory:: " + e;
+            inventoryTextArea.append(errString);
+        }
     }
 
     private void genomicsButtonActionPerformed(ActionEvent e) {
-        // TODO add your code here
+        inventoryTextArea.setText("");
+
+        try {
+            List<Product> products = InventoryService.getInstance().GetProductsByType("genomic");
+
+            // Now we list the inventory for the selected table
+            inventoryTextArea.setText("");
+            for (Product product : products) {
+                String msgString = product.getId() + " : " + product.getDescription() +
+                        " : $"+ product.getPrice() + " : " + product.getQuantity()
+                        + " units in stock";
+                inventoryTextArea.append("\n" + msgString);
+            }
+        } catch (Exception ex) {
+            String errString =  "\nProblem getting inventory:: " + e;
+            inventoryTextArea.append(errString);
+        }
     }
 
     private void processesButtonActionPerformed(ActionEvent e) {
-        // TODO add your code here
+        inventoryTextArea.setText("");
+
+        try {
+            List<Product> products = InventoryService.getInstance().GetProductsByType("processing");
+
+            // Now we list the inventory for the selected table
+            inventoryTextArea.setText("");
+            for (Product product : products) {
+                String msgString = product.getId() + " : " + product.getDescription() +
+                        " : $"+ product.getPrice() + " : " + product.getQuantity()
+                        + " units in stock";
+                inventoryTextArea.append("\n" + msgString);
+            }
+        } catch (Exception ex) {
+            String errString =  "\nProblem getting inventory:: " + e;
+            inventoryTextArea.append(errString);
+        }
     }
 
     private void referenceMaterialsButtonActionPerformed(ActionEvent e) {
+        inventoryTextArea.setText("");
+
+        try {
+            List<Product> products = InventoryService.getInstance().GetProductsByType("referencematerial");
+
+            // Now we list the inventory for the selected table
+            inventoryTextArea.setText("");
+            for (Product product : products) {
+                String msgString = product.getId() + " : " + product.getDescription() +
+                        " : $"+ product.getPrice() + " : " + product.getQuantity()
+                        + " units in stock";
+                inventoryTextArea.append("\n" + msgString);
+            }
+        } catch (Exception ex) {
+            String errString =  "\nProblem getting inventory:: " + e;
+            inventoryTextArea.append(errString);
+        }
+    }
+
+    private void addToOrderButtonActionPerformed(ActionEvent e) { }
+
+    private void submitOrderButtonActionPerformed(ActionEvent e) {
         // TODO add your code here
     }
 
@@ -54,15 +177,7 @@ public class OrderMainFrame extends JFrame {
         // TODO add your code here
     }
 
-    private void addToOrderButtonActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
     private void costTextActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void submitOrderButtonActionPerformed(ActionEvent e) {
         // TODO add your code here
     }
 
