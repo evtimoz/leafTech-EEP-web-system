@@ -47,6 +47,10 @@ public class Product {
         Quantity = quantity;
     }
 
+    public void decrementQuantity() {
+        Quantity = Quantity - 1;
+    }
+
     private String Description;
     private double Price;
     private int Quantity;

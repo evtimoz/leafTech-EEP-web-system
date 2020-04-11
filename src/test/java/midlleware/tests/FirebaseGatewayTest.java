@@ -1,6 +1,7 @@
 package midlleware.tests;
 
 import middleware.FirebaseGateway;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,5 +19,12 @@ class FirebaseGatewayTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    void decrementProductQuantityById() throws Exception {
+        FirebaseGateway firebaseGateway = new FirebaseGateway();
+
+        firebaseGateway.DecrementProductQuantityById("1");
     }
 }

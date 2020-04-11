@@ -42,4 +42,10 @@ public class InventoryService {
 
         firebaseGateway.DeleteProductById(Id);
     }
+
+    public void DecrementProductQuantity(String Id) throws Exception {
+        FirebaseGateway firebaseGateway = new FirebaseGateway();
+
+        firebaseGateway.DecrementProductQuantityById(Id);
+    }
 }

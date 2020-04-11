@@ -113,4 +113,21 @@ public class FirebaseGateway {
             ex.printStackTrace();
         }
     }
+
+    public void DecrementProductQuantityById(String Id) throws Exception {
+        Firestore client = GetClient();
+        ApiFuture<QuerySnapshot> future =
+                client.collection("products").whereEqualTo("id", Id).get();
+
+        List<QueryDocumentSnapshot> productDocuments = future.get().getDocuments();
+
+        if(productDocuments.size() == 0) throw new Exception("This product was not found in the inventory. Please try again");
+
+        QueryDocumentSnapshot productToDecrement = productDocuments.get(0);
+
+        Product updatedProduct = productToDecrement.toObject(Product.class);
+        updatedProduct.decrementQuantity();
+
+        productToDecrement.getReference().update("quantity", updatedProduct.getQuantity());
+    }
 }

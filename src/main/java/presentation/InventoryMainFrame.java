@@ -212,7 +212,81 @@ public class InventoryMainFrame extends JFrame {
     }
 
     private void decrementButtonActionPerformed(ActionEvent e) {
-        // TODO add your code here
+        // Decrements the inventory count for a selected item
+        int beginIndex;                     // Parsing index
+        int endIndex;                       // Parsing index
+        String productID = null;            // Product ID pnemonic
+        boolean IndexNotFound;              // Flag indicating a string index was not found.
+        String inventorySelection = null;   // Inventory text string selected by user
+        IndexNotFound = false;              // Flag indicating that a string index was not found
+
+        // this is the selected line of text
+        inventorySelection =  inventoryTextArea.getSelectedText();
+
+        // make sure the selection is not blank
+        if ( inventorySelection != null )
+        {
+            // get the product ID - here we get the leading index
+            beginIndex = 0;
+            endIndex = inventorySelection.indexOf(">>",beginIndex);
+
+            if (endIndex < 0 ) {
+                IndexNotFound = true;
+            } else {
+                beginIndex = endIndex+2; //skip past ">>"
+            }
+
+            if ( !IndexNotFound )
+            {
+                // Here we get the trailing index and parse out the productID
+                endIndex = inventorySelection.indexOf(":",beginIndex);
+
+                if (endIndex < 0 ) {
+                    IndexNotFound = true;
+                } else {
+                    productID = inventorySelection.substring(beginIndex,endIndex);
+                }
+            }
+
+            // Now we decrement the inventory count of the item indicated by the productID we
+            // parsed out above from the indicated table.
+
+            if ( !IndexNotFound )
+            {
+                inventoryTextArea.setText("");
+                inventoryTextArea.append( "Decrementing ProductID: " + productID );
+
+                //If there is no connection error, then we form the SQL statement
+                //to decrement the inventory item count and then execute it.
+                try
+                {
+                    InventoryService.getInstance().DecrementProductQuantity(productID.trim());
+                    inventoryTextArea.append("\n\n" + productID + " inventory decremented...");
+
+                    List<Product> products = InventoryService.getInstance().GetProductsByType(productType);
+
+                    // Now we list the inventory for the selected table
+                    inventoryTextArea.setText("");
+                    for (Product product : products) {
+                        String msgString = productType + " >> " + product.getId() + " :: " + product.getDescription() +
+                                " :: "+ product.getQuantity() + " :: " + product.getPrice();
+                        inventoryTextArea.append("\n" + msgString);
+                    }
+                } catch (Exception ex) {
+
+                    String errString =  "\nProblem with delete:: " + ex;
+                    inventoryTextArea.append(errString);
+
+                } // try
+
+            } else {
+                inventoryTextArea.setText("");
+                inventoryTextArea.append("\nNo items selected...\nSELECT ENTIRE INVENTORY LINE TO ADD ITEM TO ORDER\n(TRIPLE CLICK ITEM LINE)");
+            }
+        } else {
+            inventoryTextArea.setText("");
+            inventoryTextArea.append("\nNo items selected...\nSELECT ENTIRE INVENTORY LINE TO ADD ITEM TO ORDER\n(TRIPLE CLICK ITEM LINE)");
+        } // Blank string check
     }
 
     private void productIdTextActionPerformed(ActionEvent e) {
