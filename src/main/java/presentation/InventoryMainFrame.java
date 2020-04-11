@@ -26,23 +26,23 @@ public class InventoryMainFrame extends JFrame {
     private static String productType = "";
 
     private void treesRadioButtonActionPerformed(ActionEvent e) {
-        productType = "trees";
+        productType = "tree";
     }
 
     private void seedsRadioButtonActionPerformed(ActionEvent e) {
-        productType = "seeds";
+        productType = "shrub";
     }
 
     private void shrubsRadioButtonActionPerformed(ActionEvent e) {
-        productType = "shrubs";
+        productType = "seed";
     }
 
     private void cultureBoxesRadioButtonActionPerformed(ActionEvent e) {
-        productType = "cultureBoxes";
+        productType = "culturebox";
     }
 
     private void genomicsRadioButtonActionPerformed(ActionEvent e) {
-        productType = "genomics";
+        productType = "genomic";
     }
 
     private void processingRadioButtonActionPerformed(ActionEvent e) {
@@ -50,7 +50,7 @@ public class InventoryMainFrame extends JFrame {
     }
 
     private void referenceMaterialsRadioButtonActionPerformed(ActionEvent e) {
-        productType = "referenceMaterials";
+        productType = "referencematerial";
     }
 
     private void addItemButtonActionPerformed(ActionEvent e) {
@@ -325,6 +325,15 @@ public class InventoryMainFrame extends JFrame {
         genomicsRadioButton = new JRadioButton();
         processingRadioButton = new JRadioButton();
         referenceMaterialsRadioButton = new JRadioButton();
+
+        ButtonGroup productsGroup = new ButtonGroup();
+        productsGroup.add(treesRadioButton);
+        productsGroup.add(shrubsRadioButton);
+        productsGroup.add(seedsRadioButton);
+        productsGroup.add(genomicsRadioButton);
+        productsGroup.add(cultureBoxesRadioButton);
+        productsGroup.add(referenceMaterialsRadioButton);
+        productsGroup.add(processingRadioButton);
 
         //======== this ========
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
