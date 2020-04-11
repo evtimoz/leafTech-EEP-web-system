@@ -46,7 +46,6 @@ public class LoginDialog extends JDialog {
 
         try {
             role = AuthenticationService.getInstance().GainUserRole(username, password); // get role from firebase
-            System.out.println(role);
         } catch (Exception ex){
             ex.printStackTrace();
         }
@@ -59,6 +58,11 @@ public class LoginDialog extends JDialog {
         }
         if (role.equals("shipping")) {
             new ShippingMainFrame().setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "Incorrect login or password. Try again",
+                    "Authorization error",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -69,7 +73,6 @@ public class LoginDialog extends JDialog {
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
-        frameTitle = new JLabel();
         usernameText = new JTextField();
         passwordText = new JPasswordField();
         usernameLabel = new JLabel();
@@ -79,9 +82,6 @@ public class LoginDialog extends JDialog {
         //======== this ========
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         Container contentPane = getContentPane();
-
-        //---- frameTitle ----
-        frameTitle.setText("EEP Log In");
 
         //---- usernameText ----
         usernameText.addActionListener(new ActionListener() {
@@ -111,38 +111,33 @@ public class LoginDialog extends JDialog {
                 .add(contentPaneLayout.createSequentialGroup()
                     .add(contentPaneLayout.createParallelGroup()
                         .add(contentPaneLayout.createSequentialGroup()
-                            .add(67, 67, 67)
+                            .add(26, 26, 26)
                             .add(contentPaneLayout.createParallelGroup()
                                 .add(usernameLabel)
                                 .add(passwordLabel))
-                            .add(21, 21, 21)
-                            .add(contentPaneLayout.createParallelGroup(GroupLayout.LEADING, false)
-                                .add(passwordText, GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
-                                .add(usernameText, GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)))
+                            .addPreferredGap(LayoutStyle.UNRELATED)
+                            .add(contentPaneLayout.createParallelGroup()
+                                .add(usernameText, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)
+                                .add(passwordText, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)))
                         .add(contentPaneLayout.createSequentialGroup()
-                            .add(109, 109, 109)
-                            .add(loginButton))
-                        .add(contentPaneLayout.createSequentialGroup()
-                            .add(112, 112, 112)
-                            .add(frameTitle)))
-                    .addContainerGap(74, Short.MAX_VALUE))
+                            .add(67, 67, 67)
+                            .add(loginButton)))
+                    .addContainerGap(14, Short.MAX_VALUE))
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
                 .add(GroupLayout.TRAILING, contentPaneLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .add(frameTitle)
-                    .addPreferredGap(LayoutStyle.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(contentPaneLayout.createParallelGroup(GroupLayout.BASELINE)
                         .add(usernameLabel)
                         .add(usernameText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                     .addPreferredGap(LayoutStyle.RELATED)
                     .add(contentPaneLayout.createParallelGroup(GroupLayout.BASELINE)
-                        .add(passwordText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .add(passwordLabel))
+                        .add(passwordLabel)
+                        .add(passwordText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                     .addPreferredGap(LayoutStyle.UNRELATED)
                     .add(loginButton)
-                    .add(130, 130, 130))
+                    .addContainerGap(17, Short.MAX_VALUE))
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -151,7 +146,6 @@ public class LoginDialog extends JDialog {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - unknown
-    private JLabel frameTitle;
     private JTextField usernameText;
     private JPasswordField passwordText;
     private JLabel usernameLabel;
