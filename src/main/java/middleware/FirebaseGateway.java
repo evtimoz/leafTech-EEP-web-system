@@ -12,6 +12,7 @@ import model.Product;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,13 +25,9 @@ import java.util.concurrent.ExecutionException;
 class FirebaseGateway {
 
     private static Firestore GetClient(){
-        FileInputStream serviceAccount =
+        InputStream serviceAccount =
                 null;
-        try {
-            serviceAccount = new FileInputStream("creds.json");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        serviceAccount = FirebaseGateway.class.getResourceAsStream("/creds.json");
 
         FirebaseOptions options = null;
         try {

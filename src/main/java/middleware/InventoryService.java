@@ -2,6 +2,7 @@ package middleware;
 
 import model.Product;
 
+import java.net.URISyntaxException;
 import java.util.List;
 
 /**
