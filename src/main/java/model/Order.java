@@ -1,4 +1,7 @@
 package model;
+
+import java.util.List;
+
 /**
  * Created by evtimoz 4/11/20.
  */
@@ -11,6 +14,8 @@ public class Order {
     private String Phone;
     private Float Total;
     private Boolean Shipped;
+
+    public Order() {};
 
     public Order(String date, String firstname, String lastname, String address, String phone, Float total, Boolean shipped) {
         Date = date;

@@ -6,7 +6,7 @@ import model.Product;
 import java.util.List;
 
 /**
- * Created by arman 4/9/20.
+ * Created by evtimoz 4/11/20.
  */
 public class OrderService {
     private static OrderService instance;
@@ -29,5 +29,18 @@ public class OrderService {
         FirebaseGateway firebaseGateway = new FirebaseGateway();
 
         firebaseGateway.createOrderWithProducts(order, products);
+    }
+
+
+    public List<Order> GetOrders() throws Exception{
+        FirebaseGateway firebaseGateway = new FirebaseGateway();
+
+        return firebaseGateway.GetListOfOrders();
+    }
+
+    public Order GetOrderById(Integer Id) throws Exception{
+        FirebaseGateway firebaseGateway = new FirebaseGateway();
+
+        return firebaseGateway.GetOrderById(Id);
     }
 }
