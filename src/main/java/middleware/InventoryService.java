@@ -31,7 +31,7 @@ public class InventoryService {
         firebaseGateway.AddNewInventoryItem(product);
     }
 
-    public List<Product> GetProductsByType(String type){
+    public List<Product> GetProductsByType(String type) throws Exception{
         FirebaseGateway firebaseGateway = new FirebaseGateway();
 
         return firebaseGateway.GetListOfProductsByType(type);

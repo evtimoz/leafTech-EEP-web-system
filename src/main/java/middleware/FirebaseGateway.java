@@ -1,7 +1,6 @@
 package middleware;
 
 import com.google.api.core.ApiFuture;
-import com.google.api.services.storage.Storage;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.*;
 import com.google.firebase.FirebaseApp;
@@ -9,14 +8,10 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 import model.Product;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by arman 4/9/20.
@@ -65,7 +60,7 @@ public class FirebaseGateway {
         Firestore client = GetClient();
 
         ApiFuture<QuerySnapshot> future =
-                client.collection("products").whereEqualTo("id", product.getId()).get();
+                client.collection("products").whereEqualTo("id", product.getId()).whereEqualTo("type", product.getType()).get();
 
         List<QueryDocumentSnapshot> productDocuments = future.get().getDocuments();
 
@@ -75,7 +70,7 @@ public class FirebaseGateway {
         client.collection("products").document().set(product);
     }
 
-    List<Product> GetListOfProductsByType(String type) {
+    List<Product> GetListOfProductsByType(String type) throws Exception {
         List<Product> resultingList = new ArrayList<Product>();
         Firestore client = GetClient();
 
@@ -89,7 +84,7 @@ public class FirebaseGateway {
             }
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            throw new Exception("error establishing connection with Firebase - " + ex.getMessage());
         }
 
         return resultingList;
