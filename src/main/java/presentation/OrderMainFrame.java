@@ -6,10 +6,15 @@ package presentation;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import javax.swing.*;
 
+import com.sun.tools.corba.se.idl.constExpr.Or;
 import middleware.InventoryService;
+import middleware.OrderService;
+import model.Order;
 import model.Product;
 import org.jdesktop.layout.GroupLayout;
 import org.jdesktop.layout.LayoutStyle;
@@ -163,10 +168,195 @@ public class OrderMainFrame extends JFrame {
         }
     }
 
-    private void addToOrderButtonActionPerformed(ActionEvent e) { }
+    private void addToOrderButtonActionPerformed(ActionEvent e) {
+        // This button gets the selected line of text from the
+        // inventory list window jTextArea1. The line of text is parsed and
+        // the relevant information is placed in the order area (jTextArea2).
+
+        int beginIndex;                     // Parsing index
+        int endIndex;                       // Parsing index
+        Float fCost;                        // Item cost
+        String productDescription = null;   // Product description
+        String productID = null;            // Product ID pnemonic
+        String sCost,sTotalCost;            // String order and total cost values
+        Boolean IndexNotFound;              // Flag indicating a string index was not found.
+
+        // Initialization
+
+        String inventorySelection = null;
+        IndexNotFound = false;
+        sCost = null;
+        sTotalCost = null;
+
+        // this is the selected line of text
+        inventorySelection =  inventoryTextArea.getSelectedText();
+
+        // make sure its not blank
+        if ( inventorySelection != null )
+        {
+            // get the product ID
+            beginIndex = 0;
+            endIndex = inventorySelection.indexOf(" : ",beginIndex);
+            if (endIndex < 0 ) {
+                IndexNotFound = true;
+            } else {
+                productID = inventorySelection.substring(beginIndex,endIndex);
+            }
+
+            if ( !IndexNotFound )
+            {
+                // get the product description
+                beginIndex = endIndex + 3; //skip over " : "
+                endIndex = inventorySelection.indexOf(" : ",beginIndex);
+                if (endIndex < 0 ) {
+                    IndexNotFound = true;
+                } else {
+                    productDescription = inventorySelection.substring(beginIndex,endIndex);
+                }
+            }
+
+            // get the string cost value
+            if ( !IndexNotFound )
+            {
+                beginIndex = endIndex + 4; //skip over " : $"
+                endIndex = inventorySelection.indexOf(" : ",beginIndex);
+                if (endIndex < 0 ) {
+                    IndexNotFound = true;
+                } else {
+                    sCost = inventorySelection.substring(beginIndex,endIndex);
+                }
+            }
+
+            // write the string to the order area
+
+            if ( !IndexNotFound )
+            {
+                itemsSelectedTextArea.append( productID + " : " + productDescription + " : $"
+                        + sCost + "\n");
+
+                // convert the string cost to a float, add it to what is in the
+                // cost field (jTextField6), and update the cost field with the
+                // new value
+
+                sTotalCost = costText.getText();
+                beginIndex = 0;
+                beginIndex = sTotalCost.indexOf("$",beginIndex)+1;
+                sTotalCost = sTotalCost.substring(beginIndex, sTotalCost.length());
+                fCost = Float.parseFloat(sTotalCost) + Float.parseFloat(sCost);
+                costText.setText( "$" + fCost.toString());
+
+            } else {
+                messagesTextArea.append("\nNo items selected...\nSELECT ENTIRE INVENTORY LINE TO ADD ITEM TO ORDER\n(TRIPLE CLICK ITEM LINE)");
+            }
+        } else {
+            messagesTextArea.append("\nNo items selected...\nSELECT ENTIRE INVENTORY LINE TO ADD ITEM TO ORDER\n(TRIPLE CLICK ITEM LINE)");
+        } // Blank string check
+    }
 
     private void submitOrderButtonActionPerformed(ActionEvent e) {
-        // TODO add your code here
+        // This is the submit order button. This handler will check to make sure
+        // that the customer information is provided, then create an entry in
+        // the orderinfo::orders table. It will also create another table where
+        // the list of items is stored. This table is also in the orderinfo
+        // database as well.
+
+        int beginIndex;                 // String parsing index
+        String customerAddress;         // Buyers mailing address
+        int endIndex;                   // String paring index
+        String firstName = null;        // Customer's first name
+        float fCost;                    // Total order cost
+        String description;             // Tree, seed, or shrub description
+        boolean executeError = false;   // Error flag
+        String errString = null;        // String for displaying errors
+        String lastName = null;         // Customer's last name
+        String sTotalCost = null;       // String representing total order cost
+        String sPerUnitCost = null;     // String representation of per unit cost
+        String orderItem = null;        // Order line item from jTextArea2
+        String phoneNumber = null;      // Customer phone number
+        float perUnitCost;              // Cost per tree, seed, or shrub unit
+        String productID = null;        // Product id of tree, seed, or shrub
+
+        // Check to make sure there is a first name, last name, address and phone
+        if ((firstNameText.getText().length()==0) || (lastNameText.getText().length()==0)
+                || (addressTextArea.getText().length()==0)
+                || (phoneTextArea.getText().length()==0))
+        {
+            errString =  "\nMissing customer information!!!\n";
+            messagesTextArea.append(errString);
+            executeError = true;
+        }
+
+        //If there is not a connection error, then we form the SQL statement
+        //to submit the order to the orders table and then execute it.
+
+        if (!executeError )
+        {
+            Calendar rightNow = Calendar.getInstance();
+
+            int TheHour = rightNow.get(Calendar.HOUR_OF_DAY);
+            int TheMinute = rightNow.get(Calendar.MINUTE);
+            int TheSecond = rightNow.get(Calendar.SECOND);
+            int TheDay = rightNow.get(Calendar.DAY_OF_WEEK);
+            int TheMonth = rightNow.get(Calendar.MONTH);
+            int TheYear = rightNow.get(Calendar.YEAR);
+
+            String dateTimeStamp = TheMonth + "/" + TheDay + "/" + TheYear + " "
+                    + TheHour + ":" + TheMinute  + ":" + TheSecond;
+
+            // Get the order data
+            firstName = firstNameText.getText();
+            lastName = lastNameText.getText();
+            phoneNumber = phoneTextArea.getText();
+            customerAddress = addressTextArea.getText();
+            sTotalCost = costText.getText();
+            beginIndex = 0;
+            beginIndex = sTotalCost.indexOf("$",beginIndex)+1;
+            sTotalCost = sTotalCost.substring(beginIndex, sTotalCost.length());
+            fCost = Float.parseFloat(sTotalCost);
+
+            Order newOrder = new Order(dateTimeStamp, firstName, lastName, customerAddress, phoneNumber, fCost, false);
+
+            String[] items = itemsSelectedTextArea.getText().split("\\n");
+            List<Product> products = new ArrayList<Product>();
+
+            for (int i = 0; i < items.length; i++ )
+            {
+                orderItem = items[i];
+                messagesTextArea.append("\nitem #:" + i + ": " + items[i]);
+
+                // Check just to make sure that a blank line was not stuck in
+                // there... just in case.
+
+                if (orderItem.length() > 0 )
+                {
+                    // Parse out the product id
+                    beginIndex = 0;
+                    endIndex = orderItem.indexOf(" : ",beginIndex);
+                    productID = orderItem.substring(beginIndex,endIndex);
+
+                    // Parse out the description text
+                    beginIndex = endIndex + 3; //skip over " : "
+                    endIndex = orderItem.indexOf(" : ",beginIndex);
+                    description = orderItem.substring(beginIndex,endIndex);
+
+                    // Parse out the item cost
+                    beginIndex = endIndex + 4; //skip over " : $"
+                    //endIndex = orderItem.indexOf(" : ",orderItem.length());
+                    //sPerUnitCost = orderItem.substring(beginIndex,endIndex);
+                    sPerUnitCost = orderItem.substring(beginIndex,orderItem.length());
+                    perUnitCost = Float.parseFloat(sPerUnitCost);
+
+                    products.add(new Product(productID, description, perUnitCost));
+
+                } // line length check
+            } //for each line of text in order table
+
+            try {
+                OrderService.getInstance().createOrder(newOrder, products);
+            } catch (Exception ex) {
+                messagesTextArea.append("Error creating order: " + ex.getMessage());
+            }
+        }
     }
 
     private void lastNameTextActionPerformed(ActionEvent e) {

@@ -63,5 +63,13 @@ public class Product {
         Quantity = quantity;
     }
 
+    public Product(String id, String description, double price){
+        Id = id;
+        Description = description;
+        Price = price;
+        Type = "unset";
+        Quantity = 1;
+    }
+
     public Product(){}
 }

@@ -7,7 +7,6 @@ import java.util.List;
  */
 public class Order {
 
-    private String Id;
     private String Date;
     private String Firstname;
     private String Lastname;
@@ -18,8 +17,7 @@ public class Order {
 
     public Order() {};
 
-    public Order(String id, String date, String firstname, String lastname, String address, String phone, Float total, Boolean shipped) {
-        Id = id;
+    public Order(String date, String firstname, String lastname, String address, String phone, Float total, Boolean shipped) {
         Date = date;
         Firstname = firstname;
         Lastname = lastname;
@@ -27,14 +25,6 @@ public class Order {
         Phone = phone;
         Total = total;
         Shipped = shipped;
-    }
-
-    public String getId() {
-        return Id;
-    }
-
-    public void setId(String id) {
-        Id = id;
     }
 
     public String getDate() {
