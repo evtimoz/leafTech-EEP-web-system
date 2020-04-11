@@ -24,7 +24,7 @@ public class InventoryService {
         return instance;
     }
 
-    public void AddProduct(Product product) {
+    public void AddProduct(Product product) throws Exception {
         FirebaseGateway firebaseGateway = new FirebaseGateway();
 
         firebaseGateway.AddNewInventoryItem(product);

@@ -64,19 +64,18 @@ public class FirebaseGateway {
         return "";
     }
 
-    void AddNewInventoryItem(Product product){
+    void AddNewInventoryItem(Product product) throws Exception {
         Firestore client = GetClient();
 
-        Map<String, Object> productData = new HashMap<String, Object>();
+        ApiFuture<QuerySnapshot> future =
+                client.collection("products").whereEqualTo("id", product.getId()).get();
 
-        productData.put("id", product.getId());
-        productData.put("type", product.getType());
-        productData.put("description", product.getDescription());
-        productData.put("price", product.getPrice());
-        productData.put("quantity", product.getQuantity());
+        List<QueryDocumentSnapshot> productDocuments = future.get().getDocuments();
+
+        if(productDocuments.size() != 0) throw new Exception("Product with ID:" + product.getId() + " has already been added. Enter unique ID.");
 
         // runs in asynchronous mode
-        client.collection("products").document().set(productData);
+        client.collection("products").document().set(product);
     }
 
     List<Product> GetListOfProductsByType(String type) {

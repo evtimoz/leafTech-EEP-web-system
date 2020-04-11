@@ -54,7 +54,7 @@ public class InventoryMainFrame extends JFrame {
     }
 
     private void addItemButtonActionPerformed(ActionEvent e) {
-        Boolean fieldError = false;     // Error flag
+        boolean fieldError = false;     // Error flag
         inventoryTextArea.setText("");
 
         if (!treesRadioButton.isSelected() && !seedsRadioButton.isSelected() &&
@@ -112,9 +112,9 @@ public class InventoryMainFrame extends JFrame {
                 inventoryTextArea.append("\nQuantity::     " + quantity);
                 inventoryTextArea.append("\nUnit Cost::    " + perUnitCost);
             } catch (Exception ex) {
-                inventoryTextArea.append("\nProblem adding inventory:: " + ex);
+                inventoryTextArea.append("\nProblem adding inventory:: " + ex.getMessage());
             } // try
-        } //execute SQL check
+        }
     }
 
     private void listInventoryButtonActionPerformed(ActionEvent e) {
