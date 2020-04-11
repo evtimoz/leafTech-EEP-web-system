@@ -401,8 +401,6 @@ public class OrderMainFrame extends JFrame {
         jScrollPane3 = new JScrollPane();
         messagesTextArea = new JTextArea();
         jLabel3 = new JLabel();
-        databaseServerIpLabel = new JLabel();
-        databaseServerIpText = new JTextField();
         jLabel12 = new JLabel();
         jScrollPane4 = new JScrollPane();
         addressTextArea = new JTextArea();
@@ -482,6 +480,7 @@ public class OrderMainFrame extends JFrame {
             //---- itemsSelectedTextArea ----
             itemsSelectedTextArea.setColumns(20);
             itemsSelectedTextArea.setRows(5);
+            itemsSelectedTextArea.setEditable(false);
             jScrollPane2.setViewportView(itemsSelectedTextArea);
         }
 
@@ -524,6 +523,7 @@ public class OrderMainFrame extends JFrame {
 
         //---- costText ----
         costText.setText("$0");
+        costText.setEditable(false);
         costText.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 costTextActionPerformed(e);
@@ -550,18 +550,12 @@ public class OrderMainFrame extends JFrame {
             //---- messagesTextArea ----
             messagesTextArea.setColumns(20);
             messagesTextArea.setRows(5);
+            messagesTextArea.setEditable(false);
             jScrollPane3.setViewportView(messagesTextArea);
         }
 
         //---- jLabel3 ----
         jLabel3.setText("Customer Information");
-
-        //---- databaseServerIpLabel ----
-        databaseServerIpLabel.setText("Server IP Address:");
-
-        //---- databaseServerIpText ----
-        databaseServerIpText.setEditable(false);
-        databaseServerIpText.setText("localhost");
 
         //---- jLabel12 ----
         jLabel12.setText("Address");
@@ -593,82 +587,68 @@ public class OrderMainFrame extends JFrame {
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
                 .add(contentPaneLayout.createSequentialGroup()
+                    .add(316, 316, 316)
+                    .add(jLabel1)
+                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(contentPaneLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .add(contentPaneLayout.createParallelGroup(GroupLayout.TRAILING)
+                        .add(GroupLayout.LEADING, jLabel12)
+                        .add(GroupLayout.LEADING, jScrollPane4, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+                        .add(GroupLayout.LEADING, jLabel7)
+                        .add(GroupLayout.LEADING, firstNameText)
+                        .add(GroupLayout.LEADING, jLabel6)
+                        .add(GroupLayout.LEADING, jLabel3)
+                        .add(GroupLayout.LEADING, jLabel8)
+                        .add(phoneTextArea)
+                        .add(lastNameText))
+                    .addPreferredGap(LayoutStyle.RELATED)
                     .add(contentPaneLayout.createParallelGroup()
                         .add(contentPaneLayout.createSequentialGroup()
-                            .add(316, 316, 316)
-                            .add(jLabel1))
-                        .add(contentPaneLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .add(contentPaneLayout.createParallelGroup(GroupLayout.TRAILING)
-                                .add(GroupLayout.LEADING, lastNameText)
-                                .add(GroupLayout.LEADING, jLabel12)
-                                .add(GroupLayout.LEADING, jScrollPane4, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
-                                .add(GroupLayout.LEADING, jLabel7)
-                                .add(GroupLayout.LEADING, firstNameText)
-                                .add(GroupLayout.LEADING, jLabel6)
-                                .add(GroupLayout.LEADING, jLabel3)
-                                .add(GroupLayout.LEADING, jLabel8)
-                                .add(phoneTextArea))
-                            .addPreferredGap(LayoutStyle.RELATED)
                             .add(contentPaneLayout.createParallelGroup()
-                                .add(contentPaneLayout.createSequentialGroup()
-                                    .add(9, 9, 9)
-                                    .add(itemsSelectedLabel)
-                                    .addPreferredGap(LayoutStyle.RELATED)
-                                    .add(jScrollPane1, GroupLayout.PREFERRED_SIZE, 612, GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(LayoutStyle.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .add(jScrollPane2)
+                                .add(jScrollPane1)
+                                .add(jScrollPane3)
                                 .add(contentPaneLayout.createSequentialGroup()
                                     .add(contentPaneLayout.createParallelGroup()
+                                        .add(jLabel4)
+                                        .add(jLabel13)
+                                        .add(jLabel10)
                                         .add(contentPaneLayout.createSequentialGroup()
-                                            .add(jLabel4)
-                                            .addPreferredGap(LayoutStyle.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .add(databaseServerIpLabel))
-                                        .add(jScrollPane2)
-                                        .add(jScrollPane3)
-                                        .add(contentPaneLayout.createSequentialGroup()
-                                            .add(contentPaneLayout.createParallelGroup()
-                                                .add(contentPaneLayout.createSequentialGroup()
-                                                    .add(10, 10, 10)
-                                                    .add(messagesLabel))
-                                                .add(jLabel13)
-                                                .add(jLabel10)
-                                                .add(contentPaneLayout.createSequentialGroup()
-                                                    .add(treesButton)
-                                                    .add(18, 18, 18)
-                                                    .add(seedsButton)
-                                                    .add(27, 27, 27)
-                                                    .add(shrubsButton)
-                                                    .add(18, 18, 18)
-                                                    .add(cultureBoxesButton)
-                                                    .add(18, 18, 18)
-                                                    .add(genomicsButton)
-                                                    .add(18, 18, 18)
-                                                    .add(processesButton)))
-                                            .add(0, 0, Short.MAX_VALUE)))
-                                    .addPreferredGap(LayoutStyle.RELATED)))
+                                            .add(treesButton)
+                                            .add(18, 18, 18)
+                                            .add(seedsButton)
+                                            .add(18, 18, 18)
+                                            .add(shrubsButton)
+                                            .add(18, 18, 18)
+                                            .add(cultureBoxesButton)
+                                            .add(18, 18, 18)
+                                            .add(genomicsButton)
+                                            .add(18, 18, 18)
+                                            .add(processesButton)
+                                            .add(18, 18, 18)
+                                            .add(referenceMaterialsButton)))
+                                    .add(0, 3, Short.MAX_VALUE)))
+                            .addPreferredGap(LayoutStyle.RELATED)
+                            .add(contentPaneLayout.createParallelGroup(GroupLayout.LEADING, false)
+                                .add(costText)
+                                .add(costLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .add(addToOrderButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .add(4, 4, 4))
+                        .add(contentPaneLayout.createSequentialGroup()
+                            .add(6, 6, 6)
                             .add(contentPaneLayout.createParallelGroup()
-                                .add(referenceMaterialsButton)
-                                .add(contentPaneLayout.createParallelGroup(GroupLayout.TRAILING)
-                                    .add(contentPaneLayout.createParallelGroup(GroupLayout.LEADING, false)
-                                        .add(addToOrderButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .add(costLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .add(costText))
-                                    .add(databaseServerIpText, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)))))
-                    .add(74, 74, 74))
-                .add(contentPaneLayout.createSequentialGroup()
-                    .add(300, 300, 300)
-                    .add(submitOrderButton)
-                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .add(messagesLabel)
+                                .add(itemsSelectedLabel)
+                                .add(submitOrderButton))
+                            .add(0, 0, Short.MAX_VALUE))))
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
                 .add(contentPaneLayout.createSequentialGroup()
                     .add(jLabel1)
-                    .add(25, 25, 25)
-                    .add(contentPaneLayout.createParallelGroup(GroupLayout.BASELINE)
-                        .add(jLabel4)
-                        .add(databaseServerIpText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .add(databaseServerIpLabel))
+                    .add(32, 32, 32)
+                    .add(jLabel4)
                     .add(contentPaneLayout.createParallelGroup()
                         .add(contentPaneLayout.createSequentialGroup()
                             .add(7, 7, 7)
@@ -704,28 +684,25 @@ public class OrderMainFrame extends JFrame {
                             .addPreferredGap(LayoutStyle.RELATED)
                             .add(phoneTextArea, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                         .add(contentPaneLayout.createSequentialGroup()
-                            .add(addToOrderButton, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE)
-                            .add(13, 13, 13)
-                            .add(costLabel)
+                            .add(contentPaneLayout.createParallelGroup(GroupLayout.LEADING, false)
+                                .add(jScrollPane1, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                                .add(addToOrderButton, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE))
                             .addPreferredGap(LayoutStyle.UNRELATED)
-                            .add(costText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                        .add(contentPaneLayout.createSequentialGroup()
+                            .add(itemsSelectedLabel)
+                            .addPreferredGap(LayoutStyle.RELATED)
                             .add(contentPaneLayout.createParallelGroup()
                                 .add(contentPaneLayout.createSequentialGroup()
-                                    .add(132, 132, 132)
-                                    .add(itemsSelectedLabel)
-                                    .addPreferredGap(LayoutStyle.RELATED))
-                                .add(GroupLayout.TRAILING, contentPaneLayout.createSequentialGroup()
-                                    .add(jScrollPane1, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)
-                                    .add(18, 18, 18)))
-                            .add(jScrollPane2, GroupLayout.PREFERRED_SIZE, 132, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.RELATED)
-                            .add(submitOrderButton)
-                            .add(1, 1, 1)
-                            .add(messagesLabel)))
-                    .addPreferredGap(LayoutStyle.UNRELATED)
-                    .add(jScrollPane3, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .add(costLabel)
+                                    .addPreferredGap(LayoutStyle.RELATED)
+                                    .add(costText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                .add(jScrollPane2, GroupLayout.PREFERRED_SIZE, 132, GroupLayout.PREFERRED_SIZE))))
+                    .addPreferredGap(LayoutStyle.RELATED)
+                    .add(submitOrderButton)
+                    .addPreferredGap(LayoutStyle.RELATED)
+                    .add(messagesLabel)
+                    .addPreferredGap(LayoutStyle.RELATED)
+                    .add(jScrollPane3, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(11, Short.MAX_VALUE))
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -761,8 +738,6 @@ public class OrderMainFrame extends JFrame {
     private JScrollPane jScrollPane3;
     private JTextArea messagesTextArea;
     private JLabel jLabel3;
-    private JLabel databaseServerIpLabel;
-    private JTextField databaseServerIpText;
     private JLabel jLabel12;
     private JScrollPane jScrollPane4;
     private JTextArea addressTextArea;

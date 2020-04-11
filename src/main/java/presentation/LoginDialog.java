@@ -52,11 +52,9 @@ public class LoginDialog extends JDialog {
 
         if (role.equals("order")) {
             new OrderMainFrame().setVisible(true);
-        }
-        if (role.equals("inventory")) {
+        } else if (role.equals("inventory")) {
             new InventoryMainFrame().setVisible(true);
-        }
-        if (role.equals("shipping")) {
+        } else if (role.equals("shipping")) {
             new ShippingMainFrame().setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this,
@@ -64,6 +62,8 @@ public class LoginDialog extends JDialog {
                     "Authorization error",
                     JOptionPane.ERROR_MESSAGE);
         }
+
+        this.dispose();
     }
 
     private void serverNameActionPerformed(ActionEvent e) {
