@@ -6,12 +6,12 @@ import com.google.cloud.firestore.*;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
+import model.Order;
 import model.Product;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by arman 4/9/20.
@@ -124,5 +124,20 @@ public class FirebaseGateway {
         updatedProduct.decrementQuantity();
 
         productToDecrement.getReference().update("quantity", updatedProduct.getQuantity());
+    }
+
+    public void createOrderWithProducts(Order order, List<Product> products) throws Exception{
+        Firestore client = GetClient();
+        Calendar rightNow = Calendar.getInstance();
+
+        String orderDocName = "order" + rightNow.getTimeInMillis();
+
+        client.collection("orders").document(orderDocName).set(order);
+
+        for (Product p:
+             products) {
+            ApiFuture<WriteResult> future = client.collection("orders").document(orderDocName).collection("products").document().set(p);
+            future.get();
+        }
     }
 }
