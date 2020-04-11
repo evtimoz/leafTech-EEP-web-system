@@ -16,6 +16,8 @@ public class Order {
     private Float Total;
     private Boolean Shipped;
 
+    public Order() {};
+
     public Order(String id, String date, String firstname, String lastname, String address, String phone, Float total, Boolean shipped) {
         Id = id;
         Date = date;

@@ -6,6 +6,7 @@ import com.google.cloud.firestore.*;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
+import model.Order;
 import model.Product;
 
 import java.io.IOException;
@@ -18,7 +19,7 @@ import java.util.List;
  */
 public class FirebaseGateway {
 
-    private static Firestore GetClient(){
+    private static Firestore GetClient() {
         InputStream serviceAccount =
                 null;
         serviceAccount = FirebaseGateway.class.getResourceAsStream("/creds.json");
@@ -30,7 +31,7 @@ public class FirebaseGateway {
                     .setDatabaseUrl("https://leaftech-eep-web-system.firebaseio.com")
                     .build();
 
-            if(FirebaseApp.getApps().isEmpty()) {
+            if (FirebaseApp.getApps().isEmpty()) {
                 FirebaseApp.initializeApp(options);
             }
         } catch (IOException e) {
@@ -48,7 +49,7 @@ public class FirebaseGateway {
         ApiFuture<QuerySnapshot> querySnapshot = query.get();
         List<QueryDocumentSnapshot> documents = querySnapshot.get().getDocuments();
 
-        if(documents.size() == 1){
+        if (documents.size() == 1) {
             QueryDocumentSnapshot documentSnapshot = documents.get(0);
             return documentSnapshot.getString("role");
         }
@@ -64,7 +65,8 @@ public class FirebaseGateway {
 
         List<QueryDocumentSnapshot> productDocuments = future.get().getDocuments();
 
-        if(productDocuments.size() != 0) throw new Exception("Product with ID:" + product.getId() + " has already been added. Enter unique ID.");
+        if (productDocuments.size() != 0)
+            throw new Exception("Product with ID:" + product.getId() + " has already been added. Enter unique ID.");
 
         // runs in asynchronous mode
         client.collection("products").document().set(product);
@@ -82,15 +84,14 @@ public class FirebaseGateway {
             for (DocumentSnapshot document : productDocuments) {
                 resultingList.add(document.toObject(Product.class));
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             throw new Exception("error establishing connection with Firebase - " + ex.getMessage());
         }
 
         return resultingList;
     }
 
-    void DeleteProductById(String Id){
+    void DeleteProductById(String Id) {
         Firestore client = GetClient();
         ApiFuture<QuerySnapshot> future =
                 client.collection("products").whereEqualTo("id", Id).get();
@@ -98,13 +99,12 @@ public class FirebaseGateway {
         try {
             List<QueryDocumentSnapshot> productDocuments = future.get().getDocuments();
 
-            if(productDocuments.size() != 0){
+            if (productDocuments.size() != 0) {
                 QueryDocumentSnapshot productToDelete = productDocuments.get(0);
 
                 productToDelete.getReference().delete();
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
@@ -116,7 +116,8 @@ public class FirebaseGateway {
 
         List<QueryDocumentSnapshot> productDocuments = future.get().getDocuments();
 
-        if(productDocuments.size() == 0) throw new Exception("This product was not found in the inventory. Please try again");
+        if (productDocuments.size() == 0)
+            throw new Exception("This product was not found in the inventory. Please try again");
 
         QueryDocumentSnapshot productToDecrement = productDocuments.get(0);
 
@@ -124,5 +125,45 @@ public class FirebaseGateway {
         updatedProduct.decrementQuantity();
 
         productToDecrement.getReference().update("quantity", updatedProduct.getQuantity());
+    }
+
+    List<Order> GetListOfOrders() throws Exception {
+        List<Order> resultingList = new ArrayList<Order>();
+        Firestore client = GetClient();
+
+        ApiFuture<QuerySnapshot> future = client.collection("orders").get();
+
+        try {
+            List<QueryDocumentSnapshot> orderDocuments = future.get().getDocuments();
+            for (DocumentSnapshot document : orderDocuments) {
+                resultingList.add(document.toObject(Order.class));
+            }
+        } catch (Exception ex) {
+            throw new Exception("error establishing connection with Firebase - " + ex.getMessage());
+        }
+
+        return resultingList;
+    }
+
+    Order GetOrderById(Integer Id) throws Exception {
+        List<Order> resultingList = new ArrayList<Order>();
+        Firestore client = GetClient();
+        Order order = null;
+
+        ApiFuture<QuerySnapshot> future = client.collection("orders").whereEqualTo("id", Id).get();
+
+        try {
+            List<QueryDocumentSnapshot> productDocuments = future.get().getDocuments();
+            if (productDocuments.size() == 0)
+                throw new Exception("This product was not found in the inventory. Please try again");
+
+            QueryDocumentSnapshot orderDocument = productDocuments.get(0);
+            order = orderDocument.toObject(Order.class);
+
+        } catch (Exception ex) {
+            throw new Exception("error establishing connection with Firebase - " + ex.getMessage());
+        }
+
+        return order;
     }
 }
