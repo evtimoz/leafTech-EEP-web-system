@@ -22,7 +22,13 @@ public class AuthenticationService {
 
     public String GainUserRole(String login, String password) throws Exception {
         FirebaseGateway firebaseGateway = new FirebaseGateway();
+        firebaseGateway.LogEvent("login", login);
 
         return firebaseGateway.GetUserRoleByLoginAndPassword(login, password);
+    }
+
+    public void LogEvent(String type, String userName) throws Exception{
+        FirebaseGateway firebaseGateway = new FirebaseGateway();
+        firebaseGateway.LogEvent(type, userName);
     }
 }

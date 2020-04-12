@@ -9,6 +9,7 @@ import java.awt.event.*;
 import java.util.List;
 import javax.swing.*;
 
+import middleware.AuthenticationService;
 import middleware.OrderService;
 import model.Order;
 import model.Product;
@@ -21,8 +22,10 @@ import org.jdesktop.layout.LayoutStyle;
 public class ShippingMainFrame extends JFrame {
 
     String orderToUpdateId;
+    String userName;
 
-    public ShippingMainFrame() {
+    public ShippingMainFrame(String login) {
+        userName = login;
         initComponents();
     }
 
@@ -548,6 +551,20 @@ public class ShippingMainFrame extends JFrame {
                     .add(jScrollPane4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addContainerGap())
         );
+
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                try {
+                    AuthenticationService.getInstance().LogEvent("logout", userName);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
+                System.exit(0);
+            }
+        });
+
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents

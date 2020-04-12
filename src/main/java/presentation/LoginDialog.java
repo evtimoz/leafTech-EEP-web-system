@@ -51,11 +51,11 @@ public class LoginDialog extends JDialog {
         }
 
         if (role.equals("order")) {
-            new OrderMainFrame().setVisible(true);
+            new OrderMainFrame(username).setVisible(true);
         } else if (role.equals("inventory")) {
-            new InventoryMainFrame().setVisible(true);
+            new InventoryMainFrame(username).setVisible(true);
         } else if (role.equals("shipping")) {
-            new ShippingMainFrame().setVisible(true);
+            new ShippingMainFrame(username).setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this,
                     "Incorrect login or password. Try again",

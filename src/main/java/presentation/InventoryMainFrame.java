@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import middleware.AuthenticationService;
 import middleware.InventoryService;
 import model.Product;
 import org.jdesktop.layout.GroupLayout;
@@ -19,7 +20,10 @@ import java.util.List;
  * @author evtimoz
  */
 public class InventoryMainFrame extends JFrame {
-    public InventoryMainFrame() {
+    private String userName;
+    public InventoryMainFrame(String login) {
+        userName = login;
+
         initComponents();
     }
 
@@ -575,6 +579,20 @@ public class InventoryMainFrame extends JFrame {
                     .add(inventoryScrollPane, GroupLayout.PREFERRED_SIZE, 289, GroupLayout.PREFERRED_SIZE)
                     .add(20, 20, 20))
         );
+
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                try {
+                    AuthenticationService.getInstance().LogEvent("logout", userName);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
+                System.exit(0);
+            }
+        });
+
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents

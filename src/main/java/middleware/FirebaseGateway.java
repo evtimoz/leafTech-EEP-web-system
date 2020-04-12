@@ -6,11 +6,14 @@ import com.google.cloud.firestore.*;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
+import com.google.firestore.v1.Write;
 import model.Order;
 import model.Product;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -218,5 +221,20 @@ public class FirebaseGateway {
         productToDecrement.getReference().update("shipped", true);
 
         return true;
+    }
+
+    public void LogEvent(String type, String userName) throws Exception {
+        Firestore client = GetClient();
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+
+        Map<String, Object> docData = new HashMap<String, Object>();
+        docData.put("type", type);
+        docData.put("time", dateFormat.format(date));
+
+        ApiFuture<WriteResult> future = client.collection("logs").document(userName).collection("auth").document().set(docData);
+
+        future.get();
     }
 }

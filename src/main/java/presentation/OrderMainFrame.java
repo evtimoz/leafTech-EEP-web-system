@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.List;
 import javax.swing.*;
 
+import middleware.AuthenticationService;
 import middleware.InventoryService;
 import middleware.OrderService;
 import model.Order;
@@ -22,7 +23,9 @@ import org.jdesktop.layout.LayoutStyle;
  * @author unknown
  */
 public class OrderMainFrame extends JFrame {
-    public OrderMainFrame() {
+    private String userName;
+    public OrderMainFrame(String login) {
+        userName = login;
         initComponents();
     }
 
@@ -718,6 +721,20 @@ public class OrderMainFrame extends JFrame {
                     .add(jScrollPane3, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(29, Short.MAX_VALUE))
         );
+
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                try {
+                    AuthenticationService.getInstance().LogEvent("logout", userName);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
+                System.exit(0);
+            }
+        });
+
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
