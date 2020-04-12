@@ -4,14 +4,15 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq l {space :p:45:p, par l {seq t {par t {comp jScrollPane4::l:::x, comp jScrollPane2::l:::x:1, seq t {space :0:0:x, comp shippingApplicationLabel:::p::p, space :p:228:p}, seq l {comp jScrollPane3:::p:715:p:1, space :::x, comp markAsShippedButton:::p:151:p:1}, seq l {comp jScrollPane1::::16:x:1, space :p:444:p, comp jScrollPane5:::p:716:p:1, space :::p, comp selectOrderButton:::p:151:p}, seq {par l {comp firstNameText::l:p:171:p, comp firstNameLabel::l:p::p}, space s:::p, par l {comp lastNameLabel::l:p::p, comp lastNameText::l:p:173:p}, space u:::p, par l {comp phoneLabel:::p::p:1, comp phoneText:::p:91:p:1}, space :p:10:p, par l {comp orderDateLabel:::p::p, comp orderDateText:::::x}}, seq l {par t {comp mailingAddressLabel::l:p::p, par t:l::p {comp showShippedOrdersButton::l:::x:1, comp showPendingOrdersButton::l:::x:1}}, space :0:0:x}}, space :p:45:p}, seq {par l {comp messagesLabel::l:p::p, comp orderItemsLabel::l:p::p, comp jLabel4::l:p::p, comp orderLabel::l:p::p}, space :::p}}}}"
-			"$verticalGroup": "par l {seq l {space :::p, comp shippingApplicationLabel:::p::p, space u:::p, comp showPendingOrdersButton:::p::p, space :p:8:p, comp showShippedOrdersButton:::p::p, space s:::p, comp orderLabel:::p::p, space :::p, par l {comp selectOrderButton:::::x:1, comp jScrollPane5::l:p::p:1, comp jScrollPane1::l:p::p:1}, space s:::p, comp jLabel4:::p::p, space :p:10:p, par b {comp firstNameLabel::b:p::p, comp lastNameLabel::b:p::p, comp phoneLabel::b:p::p, comp orderDateLabel::b:p::p}, space :::p, par b {comp firstNameText::b:p::p, comp orderDateText::b:p::p, comp lastNameText::b:p::p, comp phoneText::b:p::p}, space :::p, comp mailingAddressLabel:::p::p, space :::p, comp jScrollPane2:::p:51:p, space u:::p, comp orderItemsLabel:::p::p, space :::p, par l {seq {comp jScrollPane3:::p::p:1, space :p:14:p, comp messagesLabel:::p::p}, comp markAsShippedButton:::p:99:p:1}, space u:::p, comp jScrollPane4:::p:110:p, space :p:32:p}}"
+			"$horizontalGroup": "par l {seq {par l {seq l {space :p:36:p, par l {comp messagesLabel:::p::p, comp jScrollPane4::l:p:694:p, seq l {comp jScrollPane3:::p:516:p:1, space s:::p, par l:::p {comp markAsShippedButton::::151:x:1, comp mailingAddressText::::151:x}}, comp jLabel4::l:p::p, comp orderLabel::l:p::p, seq l {par t:::p {comp jScrollPane1:::::x:1, par l {seq l {par l {comp firstNameText::l:p:171:p, comp firstNameLabel::l:p::p}, space :::p, par l {comp lastNameLabel:::p::p, comp lastNameText::l:p:173:p}, par l {seq {space :p:12:p, comp phoneLabel:::p::p:1, space :p:76:p}, seq t {space :::p, comp phoneText:::p:154:p:1}}}, seq l {space :p:9:p, comp orderItemsLabel:::p::p}}}, par l {seq l {space :p:15:p, par l {comp mailingAddressLabel:::p::p, comp orderDateLabel:::p::p, comp orderDateText::l:p:124:p}}, seq l {space s:::p, par t:::p {comp showShippedOrdersButton::l::169:x:1, comp selectOrderButton::l::169:x, comp showPendingOrdersButton::::169:x:1}}}}}}, seq l {space :p:282:p, comp shippingApplicationLabel:::p::p}}, space ::8:x}}"
+			"$verticalGroup": "par l {seq l {space :p:19:p, comp shippingApplicationLabel:::p::p, space :p:35:p, comp orderLabel:::p::p, space :::p, par t {seq {comp showPendingOrdersButton:::::x, space :::p, comp showShippedOrdersButton:::p:36:p, space :::p, comp selectOrderButton:::p:54:p:1}, comp jScrollPane1:::p:141:p:1}, space :::x, comp jLabel4:::p::p, space :p:10:p, par b {comp firstNameLabel::b:p::p, comp lastNameLabel::b:p::p, comp phoneLabel::b:p::p, comp orderDateLabel::b:p::p}, space :::p, par b {comp firstNameText::b:p::p, comp lastNameText::b:p::p, comp phoneText::b:p::p, comp orderDateText::b:p::p}, space :::p, par t {seq {comp orderItemsLabel:::p::p, space :p:20:p, comp jScrollPane3:::p:93:p:1}, seq {comp mailingAddressLabel:::p::p, space :::p, comp mailingAddressText:::p::p, space :::p, comp markAsShippedButton:::p:68:p:1}}, space u:::p, comp messagesLabel:::p::p, space :p:19:p, comp jScrollPane4:::p::p, space :::p}}"
 		} ) {
 			name: "this"
 			"defaultCloseOperation": 3
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "shippingApplicationLabel"
 				"text": "Shipping Application"
+				"font": new java.awt.Font( "Tahoma", 0, 24 )
 			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "jScrollPane1"
@@ -57,15 +58,6 @@ new FormModel {
 				name: "mailingAddressLabel"
 				"text": "Mailing Address"
 			} )
-			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-				name: "jScrollPane2"
-				add( new FormComponent( "javax.swing.JTextArea" ) {
-					name: "mailingAddressTextArea"
-					"editable": false
-					"columns": 20
-					"rows": 5
-				} )
-			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "markAsShippedButton"
 				"text": "Mark As Shipped"
@@ -86,7 +78,7 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "orderLabel"
-				"text": "Order Number : Order Date & Time: Customer Name"
+				"text": "Order Number : Order Date & Time: Customer Name                (highlight the line with oder or triple click it and choose SELECT ORDER) "
 			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "jScrollPane3"
@@ -128,18 +120,14 @@ new FormModel {
 				"editable": false
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "orderDateTextActionPerformed", true ) )
 			} )
-			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-				name: "jScrollPane5"
-				add( new FormComponent( "javax.swing.JTextArea" ) {
-					name: "orderTextArea1"
-					"editable": false
-					"columns": 20
-					"rows": 5
-				} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "mailingAddressText"
+				"editable": false
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "orderDateTextActionPerformed", true ) )
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"size": new java.awt.Dimension( 1035, 300 )
-			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 755, 1210 )
+			"location": new java.awt.Point( 10, 0 )
 		} )
 	}
 }
