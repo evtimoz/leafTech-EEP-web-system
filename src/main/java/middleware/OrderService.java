@@ -32,15 +32,27 @@ public class OrderService {
     }
 
 
-    public List<Order> GetOrders() throws Exception{
+    public List<Order> getOrders() throws Exception{
         FirebaseGateway firebaseGateway = new FirebaseGateway();
 
-        return firebaseGateway.GetListOfOrders();
+        return firebaseGateway.getListOfOrders();
     }
 
-    public Order GetOrderById(Integer Id) throws Exception{
+    public Order getOrderById(String Id) throws Exception{
         FirebaseGateway firebaseGateway = new FirebaseGateway();
 
-        return firebaseGateway.GetOrderById(Id);
+        return firebaseGateway.getOrderById(Id);
+    }
+
+    public List<Product> getProductsFromOrder(String Id) throws Exception{
+        FirebaseGateway firebaseGateway = new FirebaseGateway();
+
+        return firebaseGateway.getProductsFromOrder(Id);
+    }
+
+    public Boolean markOrderAsShipped(String id) throws Exception {
+        FirebaseGateway firebaseGateway = new FirebaseGateway();
+
+        return firebaseGateway.updateOrderStatus(id);
     }
 }

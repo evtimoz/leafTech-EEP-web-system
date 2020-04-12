@@ -126,22 +126,23 @@ public class FirebaseGateway {
         productToDecrement.getReference().update("quantity", updatedProduct.getQuantity());
     }
 
-    public void createOrderWithProducts(Order order, List<Product> products) throws Exception{
+    public void createOrderWithProducts(Order order, List<Product> products) throws Exception {
         Firestore client = GetClient();
         Calendar rightNow = Calendar.getInstance();
 
         String orderDocName = "order" + rightNow.getTimeInMillis();
+        order.setId(orderDocName);
 
         client.collection("orders").document(orderDocName).set(order);
 
-        for (Product p:
-             products) {
+        for (Product p :
+                products) {
             ApiFuture<WriteResult> future = client.collection("orders").document(orderDocName).collection("products").document().set(p);
             future.get();
         }
     }
 
-    List<Order> GetListOfOrders() throws Exception {
+    List<Order> getListOfOrders() throws Exception {
         List<Order> resultingList = new ArrayList<Order>();
         Firestore client = GetClient();
 
@@ -151,6 +152,7 @@ public class FirebaseGateway {
             List<QueryDocumentSnapshot> orderDocuments = future.get().getDocuments();
             for (DocumentSnapshot document : orderDocuments) {
                 resultingList.add(document.toObject(Order.class));
+
             }
         } catch (Exception ex) {
             throw new Exception("error establishing connection with Firebase - " + ex.getMessage());
@@ -159,7 +161,7 @@ public class FirebaseGateway {
         return resultingList;
     }
 
-    Order GetOrderById(Integer Id) throws Exception {
+    Order getOrderById(String Id) throws Exception {
         List<Order> resultingList = new ArrayList<Order>();
         Firestore client = GetClient();
         Order order = null;
@@ -179,5 +181,42 @@ public class FirebaseGateway {
         }
 
         return order;
+    }
+
+    public List<Product> getProductsFromOrder(String id) throws Exception {
+        Firestore client = GetClient();
+        List<Product> resultingList = new ArrayList<Product>();
+
+        try {
+            ApiFuture<QuerySnapshot> future = client.collection("orders").document(id).collection("products").get();
+            List<QueryDocumentSnapshot> productItems = future.get().getDocuments();
+
+            for (DocumentSnapshot product : productItems) {
+                resultingList.add(product.toObject(Product.class));
+            }
+        } catch (Exception ex) {
+            throw new Exception("error establishing connection with Firebase - " + ex.getMessage());
+        }
+        return resultingList;
+    }
+
+    public Boolean updateOrderStatus(String id) throws Exception {
+        Firestore client = GetClient();
+        ApiFuture<QuerySnapshot> future = client.collection("orders").whereEqualTo("id", id).get();
+
+        List<QueryDocumentSnapshot> orderDocuments = future.get().getDocuments();
+
+        if (orderDocuments.size() == 0) {
+            return false;
+        }
+
+        QueryDocumentSnapshot productToDecrement = orderDocuments.get(0);
+
+        Product updatedProduct = productToDecrement.toObject(Product.class);
+        updatedProduct.decrementQuantity();
+
+        productToDecrement.getReference().update("shipped", true);
+
+        return true;
     }
 }

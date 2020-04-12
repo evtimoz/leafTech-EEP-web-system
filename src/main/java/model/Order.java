@@ -7,23 +7,27 @@ import java.util.List;
  */
 public class Order {
 
+    private String Id;
     private String Date;
     private String Firstname;
+
+
     private String Lastname;
     private String Address;
     private String Phone;
     private Float Total;
     private Boolean Shipped;
 
-    public Order() {};
+    public Order() {
+    }
 
-    public Order(String date, String firstname, String lastname, String address, String phone, Float total, Boolean shipped) {
-        Date = date;
-        Firstname = firstname;
-        Lastname = lastname;
-        Address = address;
-        Phone = phone;
-        Total = total;
+    public Order(String dateTimeStamp, String firstName, String lastName, String customerAddress, String phoneNumber, float fCost, boolean shipped) {
+        Date = dateTimeStamp;
+        Firstname = firstName;
+        Lastname = lastName;
+        Address = customerAddress;
+        Phone = phoneNumber;
+        Total = fCost;
         Shipped = shipped;
     }
 
@@ -81,6 +85,14 @@ public class Order {
 
     public void setShipped(Boolean shipped) {
         Shipped = shipped;
+    }
+
+    public String getId() {
+        return Id;
+    }
+
+    public void setId(String id) {
+        Id = id;
     }
 
 }
