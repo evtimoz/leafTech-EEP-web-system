@@ -3,8 +3,8 @@
 This Java Swing web-based application is merged Leaf Tech and EEP inventory management systems under one common interface. </br> </br>
 Authentification for users by three different roles (order/inventory/shipping) provided. </br> </br>
 After log-in user can see the screen to manipulate with products depending on his role. </br> </br>
-Application is supplied in <a href="https://github.com/evtimoz/leafTech-EEP-web-system/releases/tag/1.0"> one jar-file </a>, that can be <a href="https://ru.wikihow.com/%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D1%82%D0%B8%D1%82%D1%8C-.JAR-%D1%84%D0%B0%D0%B9%D0%BB"> easily executed on any PC </a> without any additional installations (only Java pre-installed).</br> </br>
-**Important**: the time and date on your machine should be correct and syncronized by the internet.
+Application is supplied in <a href="https://github.com/evtimoz/leafTech-EEP-web-system/releases/tag/1.0"> one jar-file </a>, that can be <a href="https://ru.wikihow.com/%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D1%82%D0%B8%D1%82%D1%8C-.JAR-%D1%84%D0%B0%D0%B9%D0%BB"> easily executed on any PC </a> without any additional installations (only Java pre-installed).
+**Important**: the time and date on your machine should be correct and syncronized by the internet. </br> </br>
 
 There are three user accounts with different roles in system:
 
